@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -226,10 +228,11 @@ axes[1].set_ylim([0, 1.05])
 axes[1].grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('backpropagation_training.png', dpi=150, bbox_inches='tight')
+out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'backpropagation_training.png')
+plt.savefig(out_path, dpi=150, bbox_inches='tight')
 plt.show()
 
-print(f"\nVisualization saved to: /mnt/kimi/output/backpropagation_training.png")
+print(f"\nVisualization saved to: {out_path}")
 
 # ==========================================
 # DETAILED BACKPROPAGATION EXPLANATION

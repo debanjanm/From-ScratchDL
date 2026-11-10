@@ -130,12 +130,13 @@ def main():
     
     # Train model
     loss_fn = MSELoss()
-    train(model, X_train, y_train, epochs=1000, lr=0.01, loss_fn=loss_fn)
+    train(model, X_train, y_train, epochs=1000, lr=0.5, loss_fn=loss_fn)
     
     # Evaluate
     predictions = model.forward(X_train)
     accuracy = np.mean((predictions > 0.5) == y_train)
     print(f"\nFinal Accuracy: {accuracy:.4f}")
+    assert accuracy > 0.95, "framework demo failed to learn"
 
 if __name__ == "__main__":
     main()
