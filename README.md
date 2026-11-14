@@ -26,11 +26,12 @@ NN_topic_name/        one folder per topic, numbered in learning order (below)
 - [x] [`05_cnn`](05_cnn/cnn.ipynb) — conv2d, max-pool, im2col; synthetic 24x24 shapes (no dataset download)
 - [x] [`06_rnn_lstm`](06_rnn_lstm/rnn_lstm.ipynb) — vanilla RNN + LSTM cell, sequence prediction
 - [x] [`07_attention_transformer`](07_attention_transformer/transformer.ipynb) — multi-head attention, positional encoding, LayerNorm, encoder blocks, full gradient check
+- [x] [`08_autoencoder`](08_autoencoder/autoencoder.ipynb) — autoencoder and VAE (reparameterization trick, KL), gradient-checked, sampling from the prior
 
 Topics stay self-contained: each notebook defines every layer, loss and helper
 it needs, so any one can be read and run on its own. `common/` holds the
 standalone MLP framework and the finite-difference gradient checker that
-notebooks 02 and 07 inline.
+notebooks 02, 07 and 08 inline.
 
 ## Requirements
 
