@@ -23,6 +23,7 @@ NN_topic_name/        one folder per topic, numbered in learning order (below)
 - [x] `04_regularization` — L2 weight decay, dropout, batch norm
 - [x] `05_cnn` — conv2d, max-pool, im2col; synthetic 24x24 shapes (no dataset download)
 - [x] `06_rnn_lstm` — vanilla RNN + LSTM cell, sequence prediction
+- [x] `07_attention_transformer` — multi-head attention, positional encoding, LayerNorm, encoder blocks, full gradient check
 
 Topics stay self-contained: each redefines the small layers/losses it needs
 (`Dense`, `ReLU`, `Sigmoid`, ...) rather than importing from a shared module,
