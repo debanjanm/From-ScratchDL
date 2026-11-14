@@ -1,7 +1,11 @@
 import os
+import sys
 
 import numpy as np
 import matplotlib.pyplot as plt
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+from common.gradcheck import grad_check
 
 
 # ============================================================
@@ -204,31 +208,20 @@ class Adam:
 # GRADIENT CHECK — compare analytic backward to finite differences
 # on a tiny model, a few random entries of every parameter array.
 # ============================================================
-def grad_check(seed=0, samples_per_param=3):
+def run_grad_check(seed=0):
     rng = np.random.RandomState(seed)
     np.random.seed(seed)
     model = TransformerClassifier(vocab=6, max_len=5, d=8, heads=2, d_ff=16, n_blocks=2)
     tokens = rng.randint(0, 6, (3, 5))
     y = np.array([[1.0], [0.0], [1.0]])
-
     model.forward(tokens)
     model.backward(y)
-    worst = 0.0
-    for p, g in model.parameters():
-        for _ in range(samples_per_param):
-            idx = tuple(rng.randint(0, s) for s in p.shape)
-            orig = p[idx]
-            p[idx] = orig + 1e-5
-            model.forward(tokens)
-            lp = model.loss(y)
-            p[idx] = orig - 1e-5
-            model.forward(tokens)
-            lm = model.loss(y)
-            p[idx] = orig
-            num = (lp - lm) / 2e-5
-            # floor 1e-6: key-bias grad is exactly 0 (softmax ignores a constant shift), so pure relative error is noise
-            worst = max(worst, abs(num - g[idx]) / (abs(num) + abs(g[idx]) + 1e-6))
-    return worst
+
+    def loss():
+        model.forward(tokens)
+        return model.loss(y)
+
+    return grad_check(loss, model.parameters())
 
 
 # ============================================================
@@ -267,7 +260,7 @@ if __name__ == "__main__":
     print("TRANSFORMER ENCODER FROM SCRATCH WITH NUMPY")
     print("=" * 60)
 
-    err = grad_check()
+    err = run_grad_check()
     print(f"Gradient check (analytic vs numeric, worst relative error): {err:.2e}")
     assert err < 1e-4, "backward pass disagrees with finite differences"
 

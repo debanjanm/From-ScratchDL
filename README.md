@@ -7,8 +7,9 @@ Matplotlib is used only for plotting results, never for the core math.
 
 ## Structure
 
-Each topic is a self-contained, runnable folder — one script (or a few),
-numpy-only, with a `__main__` demo that doubles as a sanity check.
+Each topic is a self-contained, runnable folder — a Jupyter notebook (theory +
+code + plots) or, until converted, a script — numpy-only, with asserts that
+double as sanity checks.
 
 ```
 common/               small reusable MLP framework (optional)
@@ -32,10 +33,12 @@ small reusable MLP framework (used by `03_optimizers` for activations/loss).
 
 ## Requirements
 
-`numpy` for all core code; `matplotlib` only for the saved plots.
+`numpy` for all core code; `matplotlib` for plots; `jupyter` for the notebooks.
 
-## Running a topic
+## Running
 
 ```bash
-python 02_backpropagation/backpropagation.py   # or any topic folder's script
+jupyter lab 01_perceptron/perceptron.ipynb   # notebooks (01-02 converted so far)
+python 03_optimizers/optimizers.py           # scripts (03-07, pending conversion)
+./check_all.sh                               # run everything headless; non-zero exit on failure
 ```
