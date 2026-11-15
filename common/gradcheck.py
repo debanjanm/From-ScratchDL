@@ -5,12 +5,14 @@ def grad_check(loss_fn, pairs, samples_per_param=3, eps=1e-5, seed=0):
     """Compare analytic grads to central finite differences; return worst error.
 
     loss_fn: () -> float. Must do a fresh forward pass on every call.
-    pairs:   [(param, grad)] with grads already filled by one forward+backward.
+    pairs:   [(param, grad)] with grads already filled by one forward+backward
+             (copied first, so loss_fn is free to run backward itself).
     Error is |num - ana| / (|num| + |ana| + 1e-6); the floor stops params whose
     true gradient is 0 (e.g. attention key bias) from reporting float noise.
     """
     rng = np.random.RandomState(seed)
     worst = 0.0
+    pairs = [(p, g.copy()) for p, g in pairs]  # snapshot: loss_fn may run backward and overwrite live grads
     for p, g in pairs:
         for _ in range(samples_per_param):
             idx = tuple(rng.randint(0, s) for s in p.shape)
