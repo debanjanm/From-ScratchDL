@@ -29,11 +29,12 @@ NN_topic_name/        one folder per topic, numbered in learning order (below)
 - [x] [`08_autoencoder`](08_autoencoder/autoencoder.ipynb) — autoencoder and VAE (reparameterization trick, KL), gradient-checked, sampling from the prior
 - [x] [`09_gan`](09_gan/gan.ipynb) — GAN with non-saturating loss, generator gradient checked through the discriminator, quality and mode-coverage metrics
 - [x] [`10_word2vec`](10_word2vec/word2vec.ipynb) — skip-gram with negative sampling, gradient-checked; neighbor-purity and analogy tests; PPMI+SVD baseline
+- [x] [`11_resnet`](11_resnet/resnet.ipynb) — residual blocks vs plain deep nets on two spirals; depth sweep and learning-rate robustness, gradient-checked
 
 Topics stay self-contained: each notebook defines every layer, loss and helper
 it needs, so any one can be read and run on its own. `common/` holds the
 standalone MLP framework and the finite-difference gradient checker that
-notebooks 02 and 07-10 inline.
+notebooks 02 and 07-11 inline.
 
 ## Requirements
 
