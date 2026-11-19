@@ -41,6 +41,10 @@ notebooks 02 and 07-12 inline.
 
 `numpy` for all core code; `matplotlib` for plots; `jupyter` for the notebooks.
 
+```bash
+pip install -r requirements.txt
+```
+
 ## Running
 
 ```bash
